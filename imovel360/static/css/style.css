@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: "Lato", sans-serif; /* Você pode escolher uma fonte padrão */
+}
+
+.menuOculto {
+    position: fixed;
+    top: 0;
+    left: 0; /* Alterado para ficar na esquerda */
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 0; /* Começa fechado */
+    height: 100%;
+    z-index: 10;
+    transition: width 0.3s;
+    color: white;
+    overflow-x: hidden; /* Impede que o conteúdo apareça antes de abrir */
+    padding-top: 60px; /* Ajuste de espaço no topo */
+}
+
+.menuOculto a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.menuOculto a:hover {
+    color: #fff;
+}
+
+.menuOculto .btnFechar {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+#principal {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Agora alinhado à esquerda */
+    transition: margin-left 0.3s;
+    z-index: 20;
+}
+
+#principal span {
+    font-size: 30px;
+    cursor: pointer;
+    }
+
+#whatsapp {
+    z-index: 99;
+}
+
+@media screen and (max-height: 450px) { /* Corrigido com espaço */
+    .menuOculto {
+        padding-top: 15px;
+    }
+    .menuOculto a {
+        font-size: 18px; /* Adicionada unidade */
+    }
+}
+
+.main-container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center; /* Garantir que o conteúdo esteja centralizado */
+    position: relative; /* Permitir que elementos dentro do container fiquem corretamente posicionados */
+}
+
+.main-container .image-container {
+    background: red; /* Apenas para debug, pode ser removido */
+    height: 100%;
+    width: 100%;
+    position: absolute; /* Certifica-se de que a imagem esteja posicionada corretamente */
+    top: 0;
+    left: 0;
+}
+
+.main-container h1 {
+    position: absolute;
+    top: 10%; /* Para posicionar o texto mais acima na tela */
+    left: 50%;
+    transform: translateX(-50%); /* Centralizar horizontalmente */
+    color: floralwhite;
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    z-index: 100;
+    text-shadow: 2px 16px 16px rgba(0, 0, 0, 0.3);
+    pointer-events: none; /* Para evitar que o texto interfira em interações */
+}
+
+.menu {
+    position: relative;
+    display: inline-block;
+}
+
+#menuButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeuImóvel360º</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <a href="https://wa.me/5585988551990" id="whatsapp" title="Fale conosco pelo WhatsApp" rel="noindex"
+       style="display: block; position: fixed; z-index: 99; user-select: none; width: 50px; aspect-ratio: 1;
+       bottom: 20px; right: 20px; max-width: 20%; filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.7));">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgM
+    ..."></a>
+
+    <aside id="menuOculto" class="menuOculto">
+        <a href="javascript:void(0)" class="btnFechar" onclick="fecharNav()">&times;</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="https://maps.app.goo.gl/MW6MsAUNKuWQH2WL9">Localização</a>
+        <a href="https://wa.me/5585988551990">Contato: <br>85 9 8855-1990</a>
+    </aside>
+
+    <section id="principal">
+       <span onclick="abrirNav()">&#9776;</span>
+       <p>Seu imóvel 360º</p>
+    </section>
+
+    <div class="main-container">
+        <h1 id="bem-vindo">Olá, Bem Vindo<br><br>Seu Imóvel 360º</h1>
+        <div class="image-container"></div>
+    </div>
+
+    <!-- Defina as URLs das imagens para o JavaScript -->
+    <script type="text/javascript">
+        const panoramaUrl1 = "{{ url_for('static', filename='images/360foto2.jpg') }}";
+        const panoramaUrl2 = "{{ url_for('static', filename='images/360foto.jpg') }}";
+    </script>
+
+    <!-- Incluindo as bibliotecas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="{{ url_for('static', filename='js/panolens.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script type="text/javascript">
+        // Agora você pode usar essas URLs no seu JavaScript
+        const panorama = new PANOLENS.ImagePanorama(panoramaUrl1);
+        const panorama2 = new PANOLENS.ImagePanorama(panoramaUrl2);
+
+        const imageContainer = document.querySelector(".image-container");
+
+        console.log("Adicionando panoramas...");
+
+        var infospotPositions = [
+            new THREE.Vector3(-5000, -500, 2700),
+            new THREE.Vector3(-3300, 0, 4000)
+        ];
+
+        console.log("Iniciando o visualizador...");
+
+        const viewer = new PANOLENS.Viewer({
+            container: imageContainer,
+            autoRotate: true,
+            autoRotateSpeed: 0.8,
+            controlBar: false,
+        });
+
+        /* ocultando o bem vindo em alguns segundos */
+        setTimeout(function(){
+            var a = document.getElementById("bem-vindo");
+            a.style = "display:none";
+        }, 8000);
+
+        /* ocultando o whatsapp em alguns segundos */
+        setTimeout(function(){
+            var a = document.getElementById("whatsapp");
+            a.style = "display:none";
+        }, 8000);
+
+        function abrirNav(){
+            document.getElementById("menuOculto").style.width = "250px";
+            document.getElementById("principal").style.marginLeft = "250px";
+        }
+
+        function fecharNav(){
+            document.getElementById("menuOculto").style.width = "0";
+            document.getElementById("principal").style.marginLeft = "0";
+        }
+
+        panorama.link(panorama2, infospotPositions[0]);
+        panorama2.link(panorama, infospotPositions[1]);
+
+        viewer.add(panorama, panorama2);
+    </script>
+
+</body>
+</html>
